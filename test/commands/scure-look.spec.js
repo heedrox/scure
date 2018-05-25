@@ -2,7 +2,6 @@ const scure = buildTestScure();
 const { scureLook } = require('../../src/commands/scure-look');
 const { scureInitializeState } = require('../../src/commands/scure-initializer');
 
-
 describe('Ric Escape - when looking up', () => {
   let data = null;
 
