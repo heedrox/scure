@@ -1,5 +1,5 @@
 const scure = buildTestScure();
-const { scureInitializeState } = require('../src/scure-initializer');
+const { scureInitializeState } = require('../src/commands/scure-initializer');
 
 const ABOUT_90_MINUTES_AGO = new Date(new Date().getTime() - (90 * 1000 * 60));
 

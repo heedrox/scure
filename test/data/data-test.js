@@ -1,4 +1,4 @@
-const { aRoom, anItem, aLockedDestination, aCondDescUsage, aCondDesc, anExpectAnswerAction, anAnswer, anUsage, aConditionalResponse, anUnlockingAction, pluginExtension, aPickingAction, theEndingScene } = require('../../src/dsl/scure-dsl');
+const { aRoom, anItem, aLockedDestination, aCondDescUsage, aCondDesc, anExpectAnswerAction, anAnswer, anUsage, aConditionalResponse, anUnlockingAction, pluginExtension, aPickingAction, theEndingScene } = require('../../src/dsl');
 
 
 // eslint-disable-next-line no-unused-vars

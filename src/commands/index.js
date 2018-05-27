@@ -1,0 +1,12 @@
+exports.scureAnswer = require('./scure-answer').scureAnswer;
+exports.scureBye = require('./scure-bye').scureBye;
+exports.scureFallback = require('./scure-fallback').scureFallback;
+exports.scureHelp = require('./scure-help').scureHelp;
+exports.scureInitializeState = require('./scure-initializer').scureInitializeState;
+exports.scureInventory = require('./scure-inventory').scureInventory;
+exports.scureLook = require('./scure-look').scureLook;
+exports.scurePickup = require('./scure-pickup').scurePickup;
+exports.scureTimeover = require('./scure-timeover').scureTimeover;
+exports.scureUse = require('./scure-use').scureUse;
+exports.scureWalk = require('./scure-walk').scureWalk;
+exports.scureWelcome = require('./scure-welcome').scureWelcome;
