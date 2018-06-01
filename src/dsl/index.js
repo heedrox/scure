@@ -9,8 +9,8 @@ const aPickingAction = (response, itemId) => ({ isPickingAction: true, response,
 const anExpectAnswerAction = (response, question) =>
   ({ isExpectingAnswerAction: true, response, question });
 const aConditionalResponse = conditions => ({ isConditional: true, conditions });
-const aLockedDestination = (roomId, lock, sentence = null) =>
-  ({ isLockedDestination: true, roomId, lock, sentence });
+const aLockedDestination = (roomId, lockCondition, sentence = null) =>
+  ({ isLockedDestination: true, roomId, lockCondition, sentence });
 const aCondDesc = (condition, description) => ({ conditional: true, condition, description });
 const aCondDescUsage = (consumesObjects, condition, description) =>
   ({ conditional: true, consumesObjects, condition, description });

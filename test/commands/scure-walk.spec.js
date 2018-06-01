@@ -87,7 +87,7 @@ describe('Ric Escape - when walking', () => {
       expect(response.sentence).to.contains('No sé ir al sitio habitación 108.');
     });
 
-    xit('responds something else if lock destination has a sentence when locked', () => {
+    it('responds something else if lock destination has a sentence when locked', () => {
       const destination = 'habitación 109';
       data.roomId = 'pasillo-sur';
 

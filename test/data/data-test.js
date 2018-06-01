@@ -71,7 +71,12 @@ exports.data = {
     'sala-mandos': ['pasillo-norte'],
     'pasillo-norte': ['sala-mandos', 'comedor', 'pasillo-central'],
     'pasillo-central': ['biblioteca', 'pasillo-norte', 'pasillo-sur'],
-    'pasillo-sur': [aLockedDestination('habitacion-108', 'hab108'), aLockedDestination('habitacion-109', 'hab109', 'La habitación 109 está fregada y no puedes acceder hasta que se seque.'), 'pasillo-central'],
+    'pasillo-sur': [
+      aLockedDestination('habitacion-108', 'hab108'),
+      aLockedDestination('habitacion-109', 'hab109', 'La habitación 109 está fregada y no puedes acceder hasta que se seque.'),
+      aLockedDestination('habitacion-110', 'var:suit=red', 'Solo puedes ir a la habitación 110 si tienes el traje rojo puesto.'),
+      'pasillo-central',
+    ],
     biblioteca: ['pasillo-central'],
     comedor: ['pasillo-norte'],
     'habitacion-108': ['pasillo-sur'],
