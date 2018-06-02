@@ -3,6 +3,7 @@
 ## Unreleased
 ### Added
 - Respond something else if lock destination has a sentence when locked
+- require('lib').stateLock 
 
 ### Removed
 - scure-commons.isUnlocked
