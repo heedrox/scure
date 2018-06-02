@@ -1,3 +1,4 @@
+const { stateIsUnlocked } = require('./lib/state-locks');
 const { isEmptyArg } = require('./lib/common');
 const { removeStopwords } = require('./scure-stopwords');
 const { singularizeWords } = require('./scure-singular');
@@ -39,8 +40,6 @@ const getPossibleDestinationsSentence = (scure, data) => {
   return scure.sentences.get('destinations', { destinations });
 };
 
-const isUnlocked = (lockName, unlocked) => (unlocked && unlocked.indexOf(lockName) >= 0);
-
 const ifMatchCondition = (data, scure) => (descr) => {
   if (descr.condition.indexOf(':') === -1) return true;
   const [operator, itemId] = descr.condition.split(':', 2);
@@ -50,7 +49,7 @@ const ifMatchCondition = (data, scure) => (descr) => {
     return (isNegated && !isPicked) || (!isNegated && isPicked);
   }
   if (operator === 'unlocked' || operator === '!unlocked') {
-    const isFree = isUnlocked(itemId, data.unlocked);
+    const isFree = stateIsUnlocked(data, itemId);
     return (isNegated && !isFree) || (!isNegated && isFree);
   }
   return true;
@@ -92,5 +91,4 @@ exports.getPossibleDestinationsSentence = getPossibleDestinationsSentence;
 exports.getDescription = getDescription;
 exports.getConsumesObjects = getConsumesObjects;
 exports.buildUsageIndex = buildUsageIndex;
-exports.isUnlocked = isUnlocked;
 exports.addItemIdTo = addItemIdTo;
