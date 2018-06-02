@@ -1,6 +1,6 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
-## Unreleased
+## 1.0.5
 ### Added
 - Respond something else if lock destination has a sentence when locked
 - require('lib').stateLock 
