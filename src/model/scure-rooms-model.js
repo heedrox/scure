@@ -59,7 +59,7 @@ class ScureRoomsModel {
   getPossibleDestinationNamesFrom(id, unlocked) {
     const unlockedIds = getUnlockedDestinationsIds(this.map, id, unlocked);
     const destNames = unlockedIds.map(rId => this.getRoom(rId).name);
-    return joinMultipleStrings(destNames);
+    return unlockedIds.length > 1 ? joinMultipleStrings(destNames) : destNames;
   }
 }
 

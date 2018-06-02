@@ -53,6 +53,7 @@ exports.data = {
     aRoom('pasillo-sur', 'Pasillo sur', ['paseo surf', 'paseo sur', 'pasillo surf', 'surf', 'sur'], 'Estoy en el pasillo sur de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada a las habitaciones. ¿Qué hago?'),
     aRoom('habitacion-108', 'Habitación 108', ['Mi habitación'], 'Estoy en la habitación 108, que es tu habitación. Te puedo ver a ti durmiendo sobre la cama, una mesilla, y un cuadro personal en la pared. ¿Qué hago?'),
     aRoom('habitacion-109', 'Habitación 109', ['otra habitación'], 'Es una habitación 109 sin más para las pruebas'),
+    aRoom('habitacion-110', 'Habitación 110', [], 'Es una habitación 110 para testing'),
   ],
   mapImage: {
     url: 'https://ric-escape.com/ric-escape-map.jpg',
@@ -72,6 +73,7 @@ exports.data = {
     comedor: ['pasillo-norte'],
     'habitacion-108': ['pasillo-sur'],
     'habitacion-109': ['pasillo-sur'],
+    'habitacion-110': [aLockedDestination('pasillo-sur', 'closed-inside-110')],
   },
   items: [
     anItem('ric', 'RIC', ['red', 'rick', 'robot', 'robot ric', 'robot rick', 'rick el robot', 'ric el robot', 'robot maléfico', 'ric and moriarty', 'ric modificado', 'robot modificado'], 'Soy RIC, el Remoto Interfaz de Conciencia. Gracias a mi, puedes interactuar y andar en esta nave, aunque realmente estás tendido en tu habitación. ¿Qué quieres que haga?', null, false),

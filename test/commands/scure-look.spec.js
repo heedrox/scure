@@ -1,6 +1,7 @@
 const scure = buildTestScure();
 const { scureLook } = require('../../src/commands/scure-look');
 const { scureInitializeState } = require('../../src/commands/scure-initializer');
+const { stateLock } = require('../../src/lib/');
 
 describe('Ric Escape - when looking up', () => {
   let data = null;
@@ -21,6 +22,17 @@ describe('Ric Escape - when looking up', () => {
       expect(response.sentence).to.contains(scure.rooms.getRoom('sala-mandos').description);
       expect(response.sentence).to.contains('Desde aquí puedo ir a: Pasillo norte');
     });
+  });
+
+  it('does not say possible destinations when no destinations are possible', () => {
+    const itemName = '';
+    data.roomId = 'habitacion-110';
+    stateLock(data, 'closed-inside-110');
+
+    const response = scureLook(itemName, data, scure);
+
+    expect(response.sentence).to.contains(scure.rooms.getRoom('habitacion-110').description);
+    expect(response.sentence).not.to.contains('Desde aquí puedo ir a');
   });
 
   it('looks the room depending on conditions', () => {

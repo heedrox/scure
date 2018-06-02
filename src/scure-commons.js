@@ -37,7 +37,7 @@ const isTextEqual = (name1, name2) => {
 
 const getPossibleDestinationsSentence = (scure, data) => {
   const destinations = scure.rooms.getPossibleDestinationNamesFrom(data.roomId, data.unlocked);
-  return scure.sentences.get('destinations', { destinations });
+  return (destinations.length > 0) ? scure.sentences.get('destinations', { destinations }) : '';
 };
 
 const ifMatchCondition = (data, scure) => (descr) => {
