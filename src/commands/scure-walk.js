@@ -6,7 +6,7 @@ const { getDescription } = require('../scure-commons');
 const getDestinationUnknownSentence = (arg, scure, data) => {
   const destinationsSentence = getPossibleDestinationsSentence(scure, data);
   const unknownPlaceSentence = scure.sentences.get('destination-unknown', { destination: arg });
-  return `${unknownPlaceSentence} ${destinationsSentence}`
+  return `${unknownPlaceSentence} ${destinationsSentence}`;
 };
 
 const getNotAlowedSentence = (arg, scure, data) => {

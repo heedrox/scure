@@ -1,8 +1,6 @@
 const scure = buildTestScure();
 const { scureInitializeState } = require('../src/commands/scure-initializer');
 
-const ABOUT_90_MINUTES_AGO = new Date(new Date().getTime() - (90 * 1000 * 60));
-
 describe('Ric Escape - initializer', () => {
   describe('initializes num commands', () => {
     const TEST_CASES = [
@@ -12,11 +10,11 @@ describe('Ric Escape - initializer', () => {
 
     TEST_CASES.forEach((testCase) => {
       it(`Counts num of commands for expected ${testCase.expectedNumCommands}: `, () => {
-        let data = testCase.data;
+        const { data } = testCase;
 
-        data = scureInitializeState(scure, data);
+        const { numCommands } = scureInitializeState(scure, data);
 
-        expect(data.numCommands).to.equal(testCase.expectedNumCommands);
+        expect(numCommands).to.equal(testCase.expectedNumCommands);
       });
     });
   });

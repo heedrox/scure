@@ -4,6 +4,9 @@
 ### Fixed
 - Do not show destinations when looking at room and no possible destinations
 
+### Added
+- Say pickingResponse when item not pickable
+
 ## 1.0.5
 ### Added
 - Respond something else if lock destination has a sentence when locked

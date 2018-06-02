@@ -110,7 +110,7 @@ exports.data = {
       aCondDesc('else', 'En la pared hay un cuadro muy bonito. ¿Qué hago?'),
     ], 'habitacion-108', false),
     anItem('hab108-cuadro', 'Cuadro', ['cuadro personal', 'cuadro de la pared', 'cuadro de pared', 'cuadro en la pared', 'cuadro en pared'], 'Un cuadro de tu hogar natal en Newcomb.', 'habitacion-108', true, 'Veo que al llevarme el cuadro, se ha quedado en la pared una caja fuerte al descubierto. ¿Qué hago?'),
-    anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared', 'caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras. ¿Qué hago?', 'habitacion-108', false),
+    anItem('hab108-cajafuerte', 'Caja fuerte', ['caja en pared', 'caja de la pared', 'caja'], 'Es tu caja fuerte. Para abrirla parece que necesitas un número de 4 cifras. ¿Qué hago?', 'habitacion-108', false, 'La caja fuerte está pegada a la pared. Imposible de llevarla encima.'),
     anItem('hab108-aparato', 'Aparato extraño', ['aparato', 'aparato para reprogramar robots', 'aparato de reprogramar', 'aparato para reprogramación', 'aparato para reprogramar', 'reprograma robot'], 'Es un aparato para reprogramar robots. Confieso que lo escondí yo en esa caja fuerte porque me da miedo. ¿Qué hago?', 'habitacion-108', false),
     anItem('hab108-librarykey', 'Llave', ['llave pequeña'], 'Es una llave pequeña. ¿Qué hago?', 'habitacion-108', false),
     anItem('biblio-libros', 'Libros', ['libro'], 'Aquí hay muchos libros. Los que más te pueden interesar son: libros sobre navegación, libros sobre robótica y libros sobre planetas. ¿Qué hago?', 'biblioteca', false),

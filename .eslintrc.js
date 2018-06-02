@@ -30,5 +30,6 @@ module.exports = {
     'expect': true,
     'sinon': true,
     'window': true,
+    'buildTestScure': true,
   }
 };

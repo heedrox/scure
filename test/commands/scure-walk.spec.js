@@ -1,5 +1,6 @@
 const { scureWalk } = require('../../src/commands/scure-walk');
 const { scureInitializeState } = require('../../src/commands/scure-initializer');
+
 const scure = buildTestScure();
 
 describe('Ric Escape - when walking', () => {
@@ -69,7 +70,7 @@ describe('Ric Escape - when walking', () => {
 
     it('shows a room if unlocked', () => {
       const destination = null;
-      data.roomId = 'pasillo-sur'
+      data.roomId = 'pasillo-sur';
       data.unlocked = ['hab108'];
 
       const response = scureWalk(destination, data, scure);

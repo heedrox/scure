@@ -7,7 +7,7 @@ const scureFallback = (data, scure) => {
     return aResponse(welcomeSentence, data);
   }
   const time = scure.getLeftTimeFrom(data.startTime);
-  return aResponse(scure.sentences.get('fallback', { time }), data)
+  return aResponse(scure.sentences.get('fallback', { time }), data);
 };
 
 exports.scureFallback = scureFallback;

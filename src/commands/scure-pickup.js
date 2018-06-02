@@ -1,5 +1,5 @@
 const { isEmptyArg } = require('../lib/common');
-const { aResponse } = require('../scure-response');
+const { responses } = require('./pickup/responses');
 
 const addToInventory = (data, itemId) => {
   data.inventory = data.inventory || [];
@@ -14,27 +14,20 @@ const scurePickup = (itemName, data, scure) => {
   const item = scure.items.getItemByName(itemName);
 
   if (isEmptyArg(itemName)) {
-    return aResponse(scure.sentences.get('item-unknown'));
+    return responses.unknown(scure);
   } else if (!item) {
-    return aResponse(scure.sentences.get('item-notseen', { name: itemName }));
+    return responses.notSeen(scure, itemName);
   } else if (roomId !== item.location) {
-    const name = item.name.toLowerCase();
-    return aResponse(scure.sentences.get('item-notseen', { name }));
+    return responses.notSeen(scure, item.name.toLowerCase());
   } else if (scure.items.isInInventory(item.id, data.inventory)) {
-    const name = item.name.toLowerCase();
-    return aResponse(scure.sentences.get('item-alreadyinventory', { name }));
+    return responses.alreadyInInventory(scure, item);
   } else if (!item.pickable) {
-    const name = item.name.toLowerCase();
-    return aResponse(scure.sentences.get('item-notpickable', { name }));
+    return responses.itemNotPickable(scure, item);
   } else if (scure.items.isPicked(item.id, data.picked)) {
-    const name = item.name.toLowerCase();
-    return aResponse(scure.sentences.get('item-alreadypicked', { name }));
+    return responses.alreadyPicked(scure, item);
   }
-  const name = item.name.toLowerCase();
   addToInventory(data, item.id);
-  const aditionalResponse = item.pickingResponse ? ` ${item.pickingResponse}` : '';
-  const pickedResponse = scure.sentences.get('item-pickedup', { name });
-  return aResponse(`${pickedResponse}${aditionalResponse}`, data);
+  return responses.pickedUp(scure, data, item);
 };
 
 exports.scurePickup = scurePickup;

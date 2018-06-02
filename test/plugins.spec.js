@@ -1,6 +1,7 @@
 const { scureAnswer } = require('../src/commands/scure-answer');
 const { scureUse } = require('../src/commands/scure-use');
 const { scureInitializeState } = require('../src/commands/scure-initializer');
+
 const scure = buildTestScure();
 
 describe('plugins are handled', () => {

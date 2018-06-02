@@ -1,5 +1,6 @@
 const { scureUse } = require('../../src/commands/scure-use');
 const { scureInitializeState } = require('../../src/commands/scure-initializer');
+
 const scure = buildTestScure();
 
 describe('Ric Escape - when using', () => {
@@ -11,25 +12,24 @@ describe('Ric Escape - when using', () => {
 
   const WRONG_ARG_DATA = [
     { arg: [], expectedSentence: 'use-noarg', comment: 'no arg (null)' },
-    { arg: [ 'Cuadro' ], expectedSentence: 'use-cant', comment: 'object does not exist' },
-    { arg: [ 'sillas' ], expectedSentence: 'use-cant', comment: 'object cannot be used' },
+    { arg: ['Cuadro'], expectedSentence: 'use-cant', comment: 'object does not exist' },
+    { arg: ['sillas'], expectedSentence: 'use-cant', comment: 'object cannot be used' },
   ];
 
-  WRONG_ARG_DATA.forEach((testData) => {
-    it(`tells you cannot be used or wrong object when: ${testData.comment}`, () => {
-      const itemName = testData.arg;
+  WRONG_ARG_DATA.forEach((td) => {
+    it(`tells you cannot be used or wrong object when: ${td.comment}`, () => {
+      const itemName = td.arg;
       data.roomId = 'sala-mandos';
 
       const response = scureUse(itemName, data, scure);
 
-      expect(response.sentence).to.equal(
-        scure.sentences.get(testData.expectedSentence, { item: testData.arg })
-      );
+      const expectedResponse = scure.sentences.get(td.expectedSentence, { item: td.arg });
+      expect(response.sentence).to.equal(expectedResponse);
     });
   });
 
   it('tells you cannot be used if not in room', () => {
-    const itemName = [ 'diario' ];
+    const itemName = ['diario'];
     data.roomId = 'pasillo-norte';
 
     const response = scureUse(itemName, data, scure);
@@ -38,7 +38,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('tells you cannot be used if there is no usage for it', () => {
-    const itemName = [ 'cuadro' ];
+    const itemName = ['cuadro'];
     data.roomId = 'habitacion-108';
 
     const response = scureUse(itemName, data, scure);
@@ -47,11 +47,10 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses items on inventory, but does not dispose them if onlyOnce = false', () => {
-    const itemName = [ 'llave' ];
+    const itemName = ['llave'];
     data.roomId = 'habitacion-108';
     data.inventory = ['hab108-librarykey'];
     data.picked = ['hab108-librarykey'];
-    ;
 
     const response = scureUse(itemName, data, scure);
 
@@ -70,7 +69,7 @@ describe('Ric Escape - when using', () => {
 
     TEST_DATA.forEach((testData) => {
       it(`responds depending of number of times used ${testData.usages && testData.usages['sala-mandos-diario']}`, () => {
-        const itemName = [ 'diario' ];
+        const itemName = ['diario'];
         data.roomId = 'sala-mandos';
         data.usages = testData.usages;
 
@@ -84,8 +83,8 @@ describe('Ric Escape - when using', () => {
 
   describe('when unlocking actions', () => {
     it('adds to unlocked array', () => {
-      const itemName = [ 'diario de abordo' ];
-      data.roomId = 'sala-mandos'
+      const itemName = ['diario de abordo'];
+      data.roomId = 'sala-mandos';
       data.usages = { 'sala-mandos-diario': 1 };
 
       const response = scureUse(itemName, data, scure);
@@ -93,9 +92,9 @@ describe('Ric Escape - when using', () => {
       expect(response.data.unlocked).to.eql(['hab108']);
     });
     it('does not add it twice', () => {
-      const itemName = [ 'diario de abordo' ];
-      data.roomId = 'sala-mandos'
-      data.unlocked = ['hab108']
+      const itemName = ['diario de abordo'];
+      data.roomId = 'sala-mandos';
+      data.unlocked = ['hab108'];
       data.usages = { 'sala-mandos-diario': 4 };
 
       const response = scureUse(itemName, data, scure);
@@ -105,7 +104,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses items even if wrongly accented', () => {
-    const itemName = [ 'diário' ];
+    const itemName = ['diário'];
     data.roomId = 'sala-mandos';
 
     const response = scureUse(itemName, data, scure);
@@ -114,7 +113,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses items that are in two different rooms, but chooses the right one depending on current roomId', () => {
-    const itemName = [ 'diario' ];
+    const itemName = ['diario'];
     data.roomId = 'habitacion-108';
 
     const response = scureUse(itemName, data, scure);
@@ -123,7 +122,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses item from the inventory', () => {
-    const itemName = [ 'cartera' ];
+    const itemName = ['cartera'];
     data.roomId = 'sala-mandos';
     data.picked = ['comedor-cartera'];
     data.inventory = ['comedor-cartera'];
@@ -134,7 +133,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('provides - picks items if is a pickable action and disposes old one', () => {
-    const itemName = [ 'cartera' ];
+    const itemName = ['cartera'];
     data.roomId = 'pasillo-norte';
     data.picked = ['comedor-cartera'];
     data.inventory = ['comedor-cartera'];
@@ -149,8 +148,8 @@ describe('Ric Escape - when using', () => {
   });
 
   it('provides - picks items if a pickable action even if I dont have it but im in the place', () => {
-    const itemName = [ 'cartera' ];
-    data.roomId = 'comedor'
+    const itemName = ['cartera'];
+    data.roomId = 'comedor';
     data.usages = { 'comedor-cartera': 1 };
 
     const response = scureUse(itemName, data, scure);
@@ -159,7 +158,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses items if they are not attached to a room (null location)', () => {
-    const itemName = [ 'robot' ];
+    const itemName = ['robot'];
     data.roomId = 'habitacion-108';
 
     const response = scureUse(itemName, data, scure);
@@ -168,7 +167,7 @@ describe('Ric Escape - when using', () => {
   });
 
   it('uses items only once if marked as onlyOnce to true', () => {
-    const itemName = [ 'cartera' ];
+    const itemName = ['cartera'];
     data.roomId = 'comedor';
 
     const response = scureUse(itemName, data, scure);
@@ -231,7 +230,7 @@ describe('Ric Escape - when using', () => {
   });
 
   describe('when conditional descriptions (ric + ordenador, for ex)', () => {
-    it(`works in case no condition`, () => {
+    it('works in case no condition', () => {
       const itemName = ['ric', 'ordenador'];
       data.roomId = 'sala-mandos';
       data.unlocked = [];
@@ -241,7 +240,7 @@ describe('Ric Escape - when using', () => {
       expect(response.sentence).to.contains('Mi programación no me deja');
     });
 
-    it(`works with unlocked condition`, () => {
+    it('works with unlocked condition', () => {
       const itemName = ['ric', 'ordenador'];
       data.roomId = 'sala-mandos';
       data.unlocked = ['ricmodified'];
@@ -288,5 +287,4 @@ describe('Ric Escape - when using', () => {
     expect(response.sentence.isEndingScene).to.equal(true);
     expect(response.sentence.description).to.contains('he alterado');
   });
-
 });

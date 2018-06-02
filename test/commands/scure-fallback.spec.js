@@ -1,5 +1,6 @@
 const { scureFallback } = require('../../src/commands/scure-fallback');
 const { scureInitializeState } = require('../../src/commands/scure-initializer');
+
 const scure = buildTestScure();
 
 describe('when fallback', () => {
@@ -10,7 +11,7 @@ describe('when fallback', () => {
   });
 
   it('gives you introduction the first time in any intent', () => {
-    const response = scureFallback( data, scure);
+    const response = scureFallback(data, scure);
 
     expect(response.sentence).to.contains('¡Hola!');
     expect(response.data.numCommands).to.equal(1);

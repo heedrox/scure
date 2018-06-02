@@ -84,6 +84,16 @@ describe('Ric Escape - when picking up', () => {
     expect(response.sentence).to.contains('Veo que al llevarme el cuadro');
   });
 
+  it('tells an alternative response if the item cannot be picked, but has an aditional picking response', () => {
+    const item = 'caja fuerte';
+    data.roomId = 'habitacion-108';
+
+    const response = scurePickup(item, data, scure);
+
+    expect(response.sentence).to.contains('La caja fuerte está pegada a la pared. Imposible de llevarla encima.');
+    expect(response.sentence).to.not.contains('No puedo llevarme el objeto');
+  });
+
   it('tells you first that it has it, if item already in inventory', () => {
     const item = 'aparato';
     data.roomId = 'habitacion-108';

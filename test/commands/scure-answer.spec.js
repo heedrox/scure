@@ -1,5 +1,6 @@
 const { scureAnswer } = require('../../src/commands/scure-answer');
 const { scureUse } = require('../../src/commands/scure-use');
+
 const scure = buildTestScure();
 
 describe('Ric Escape - answering actions', () => {
