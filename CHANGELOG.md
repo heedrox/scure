@@ -1,5 +1,9 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
+## Unreleased
+### Fixed
+- Do not show destinations when looking at room and no possible destinations
+
 ## 1.0.5
 ### Added
 - Respond something else if lock destination has a sentence when locked
