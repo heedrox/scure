@@ -4,9 +4,9 @@
   "description": "Script Creation Utilities for Conversational Adventures (as Ric Escape)",
   "author": "Jordi Martí",
   "license": "ISC",
-  "repository" :
-  { "type" : "git"
-  , "url" : "https://github.com/jmarti-theinit/scure.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jmarti-theinit/scure.git"
   },
   "main": "index.js",
   "keywords": [
@@ -37,6 +37,7 @@
     "eslint-plugin-react": "^7.7.0",
     "mocha": "^5.1.1",
     "npm-watch": "^0.3.0",
+    "pre-commit": "^1.2.2",
     "sinon": "^4.5.0",
     "sinon-chai": "^3.0.0"
   },
@@ -45,6 +46,7 @@
     "test": "mocha --require test/common.js --require source-map-support/register 'test/*.spec.js' test/**/*.spec.js",
     "tdd": "npm-watch test"
   },
+  "pre-commit": [ "lint" ],
   "watch": {
     "test": {
       "patterns": [
