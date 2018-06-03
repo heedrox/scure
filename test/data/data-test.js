@@ -1,5 +1,4 @@
-const { aRoom, anItem, aLockedDestination, aCondDescUsage, aCondDesc, anExpectAnswerAction, anAnswer, anUsage, aConditionalResponse, anUnlockingAction, pluginExtension, aPickingAction, theEndingScene } = require('../../src/dsl');
-
+const { aRoom, anItem, aLockedDestination, aCondDescUsage, aCondDesc, anExpectAnswerAction, anAnswer, anUsage, aConditionalResponse, anUnlockingAction, pluginExtension, aPickingAction, theEndingScene, aPickingCondition } = require('../../src/dsl');
 
 // eslint-disable-next-line no-unused-vars
 const DummyExtension = (data, scure) => data.dummyPluginText;
@@ -132,6 +131,7 @@ exports.data = {
       aCondDesc('unlocked:libroplanetas', 'Si quieres que lo lea di "Usar libro sobre lexus". ¿Qué hago?'),
     ], 'biblioteca', false),
     anItem('special-test-object-for-expecting-answer', 'Objeto especial para esperar respuesta', ['Objeto especial para esperar respuesta'], 'Este objeto lo usas y te pide decir un número', 'sala-mandos', false),
+    anItem('special-test-object-for-conditional-picking', 'Objeto especial para condicion picking', [], 'Este objeto solo se puede coger si cumples una condición', 'sala-mandos', aPickingCondition('unlocked:pickcond', 'No lo puedes agarrar hasta que cumplas pickcond')),
   ],
   usages: [
     anUsage('sala-mandos-diario', [

@@ -1,4 +1,4 @@
-const { stateIsUnlocked } = require('./lib/state-locks');
+const { matchesCondition } = require('./lib/conditions-evaluator');
 const { isEmptyArg } = require('./lib/common');
 const { removeStopwords } = require('./scure-stopwords');
 const { singularizeWords } = require('./scure-singular');
@@ -40,23 +40,9 @@ const getPossibleDestinationsSentence = (scure, data) => {
   return (destinations.length > 0) ? scure.sentences.get('destinations', { destinations }) : '';
 };
 
-const ifMatchCondition = (data, scure) => (descr) => {
-  if (descr.condition.indexOf(':') === -1) return true;
-  const [operator, itemId] = descr.condition.split(':', 2);
-  const isNegated = operator.startsWith('!');
-  if (operator === 'picked' || operator === '!picked') {
-    const isPicked = scure.items.isPicked(itemId, data.picked);
-    return (isNegated && !isPicked) || (!isNegated && isPicked);
-  }
-  if (operator === 'unlocked' || operator === '!unlocked') {
-    const isFree = stateIsUnlocked(data, itemId);
-    return (isNegated && !isFree) || (!isNegated && isFree);
-  }
-  return true;
-};
-
 const getMatchingDescription = (descriptions, data, scure) => {
-  const matchedDescriptions = descriptions.filter(ifMatchCondition(data, scure));
+  const byMatchingCondition = d => matchesCondition(data, scure)(d.condition);
+  const matchedDescriptions = descriptions.filter(byMatchingCondition);
   return matchedDescriptions.length > 0 ? matchedDescriptions[0] : null;
 };
 

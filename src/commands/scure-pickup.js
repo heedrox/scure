@@ -1,5 +1,6 @@
 const { isEmptyArg } = require('../lib/common');
 const { responses } = require('./pickup/responses');
+const { matchesCondition } = require('../lib/conditions-evaluator');
 
 const addToInventory = (data, itemId) => {
   data.inventory = data.inventory || [];
@@ -8,6 +9,13 @@ const addToInventory = (data, itemId) => {
   data.picked.push(itemId);
   return data;
 };
+
+
+const isNotPickableBecauseCondition = (item, data, scure) =>
+  item.pickable.isPickingCondition && !matchesCondition(data, scure)(item.pickable.condition);
+
+const isNotPickable = (item) =>
+  !item.pickable.isPickingCondition && !item.pickable;
 
 const scurePickup = (itemName, data, scure) => {
   const { roomId } = data;
@@ -21,9 +29,11 @@ const scurePickup = (itemName, data, scure) => {
     return responses.notSeen(scure, item.name.toLowerCase());
   } else if (scure.items.isInInventory(item.id, data.inventory)) {
     return responses.alreadyInInventory(scure, item);
-  } else if (!item.pickable) {
+  } else if (isNotPickableBecauseCondition(item, data, scure)) {
+    return responses.itemNotPickableBecauseCondition(scure, item);
+  } else if (isNotPickable(item)) {
     return responses.itemNotPickable(scure, item);
-  } else if (scure.items.isPicked(item.id, data.picked)) {
+  } if (scure.items.isPicked(item.id, data.picked)) {
     return responses.alreadyPicked(scure, item);
   }
   addToInventory(data, item.id);

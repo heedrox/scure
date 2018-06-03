@@ -15,6 +15,8 @@ const itemNotPickable = (scure, item) => (item.pickingResponse ?
   aResponse(item.pickingResponse) :
   aResponse(scure.sentences.get('item-notpickable', { name: item.name.toLowerCase() })));
 
+const itemNotPickableBecauseCondition = (scure, item) => aResponse(item.pickable.response);
+
 const responses = {
   unknown,
   notSeen,
@@ -22,6 +24,7 @@ const responses = {
   alreadyPicked,
   pickedUp,
   itemNotPickable,
+  itemNotPickableBecauseCondition,
 };
 
 exports.responses = responses;

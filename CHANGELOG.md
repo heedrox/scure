@@ -1,5 +1,9 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
+## Unreleased
+### Added
+- aPickingCondition, to allow setting conditions for picking objects.
+
 ## 1.0.6
 ### Fixed
 - Do not show destinations when looking at room and no possible destinations

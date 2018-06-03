@@ -52,6 +52,29 @@ describe('Ric Escape - when picking up', () => {
     expect(response.sentence).to.contains('Ya me llevé el objeto cartera.');
   });
 
+  describe('when conditional picking', () => {
+    it('tells you it can pick it up if condition', () => {
+      const item = 'Objeto especial para condicion picking';
+      data.roomId = 'sala-mandos';
+      data.unlocked = ['pickcond'];
+
+      const response = scurePickup(item, data, scure);
+
+      expect(response.sentence).to.contains('Me llevo el objeto');
+    });
+
+    it('tells you it can pick it up if condition', () => {
+      const item = 'Objeto especial para condicion picking';
+      data.roomId = 'sala-mandos';
+      data.unlocked = [];
+
+      const response = scurePickup(item, data, scure);
+
+      expect(response.sentence).to.contains('No lo puedes agarrar hasta que cumplas pickcond');
+    });
+  });
+
+
   describe('when valid objects', () => {
     let response;
 

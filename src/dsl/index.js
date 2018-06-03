@@ -17,7 +17,8 @@ const aCondDescUsage = (consumesObjects, condition, description) =>
 const theEndingScene = description => ({ isEndingScene: true, description });
 const anAnswer = (question, answer, response, sentenceWhenWrong) =>
   ({ question, answer, response, sentenceWhenWrong });
-
+const aPickingCondition = (condition, response) =>
+  ({ isPickingCondition: true, condition, response });
 const pluginExtension = (...data) => ({ isPluginExtension: true, data });
 
 exports.aRoom = aRoom;
@@ -33,3 +34,4 @@ exports.theEndingScene = theEndingScene;
 exports.anAnswer = anAnswer;
 exports.pluginExtension = pluginExtension;
 exports.aPickingAction = aPickingAction;
+exports.aPickingCondition = aPickingCondition;
