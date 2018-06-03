@@ -1,6 +1,6 @@
 const { stateIsUnlocked } = require('./state-locks');
 
-const matchesCondition = (data, scure) => condition => {
+const matchesCondition = (data, scure) => (condition) => {
   if (condition.indexOf(':') === -1) return true;
   const [operator, itemId] = condition.split(':', 2);
   const isNegated = operator.startsWith('!');

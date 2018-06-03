@@ -14,7 +14,7 @@ const addToInventory = (data, itemId) => {
 const isNotPickableBecauseCondition = (item, data, scure) =>
   item.pickable.isPickingCondition && !matchesCondition(data, scure)(item.pickable.condition);
 
-const isNotPickable = (item) =>
+const isNotPickable = item =>
   !item.pickable.isPickingCondition && !item.pickable;
 
 const scurePickup = (itemName, data, scure) => {
