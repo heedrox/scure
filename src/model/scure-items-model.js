@@ -24,9 +24,19 @@ class ScureItemsModel {
       && (i.location === roomId));
   }
 
-  getBestItem(itemName, roomId) {
-    const exactItemFromRoom = this.getItemByNameAndRoom(itemName, roomId);
+  getItemByNameAndInventory(name, inventory) {
+    if (isEmptyArg(name)) return null;
+    const checkInventory = inventory || [];
+    return this.items.find(i =>
+      (isTextEqual(i.name, name) || isSynonym(i.synonyms, name))
+      && (checkInventory.indexOf(i.id) >= 0));
+  }
+
+  getBestItem(itemName, data) {
+    const exactItemFromRoom = this.getItemByNameAndRoom(itemName, data.roomId);
     if (exactItemFromRoom) return exactItemFromRoom;
+    const exactItemFromInventory = this.getItemByNameAndInventory(itemName, data.inventory);
+    if (exactItemFromInventory) return exactItemFromInventory;
     return this.getItemByName(itemName);
   }
 

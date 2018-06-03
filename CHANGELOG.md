@@ -1,9 +1,12 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
-## Unreleased
+## 1.0.7
 ### Added
 - aPickingCondition, to allow setting conditions for picking objects.
 - handle pluginExtensions in item descriptions (when looking)
+
+### Fixed
+- Getting items also in inventory
 
 ## 1.0.6
 ### Fixed

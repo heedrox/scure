@@ -47,7 +47,7 @@ const validateUsability = (itemNames, data, scure) => {
     if (isEmptyArg(itemName)) {
       return scure.sentences.get('use-noarg');
     }
-    const item = scure.items.getBestItem(itemName, data.roomId);
+    const item = scure.items.getBestItem(itemName, data);
     if (!item) {
       return scure.sentences.get('use-cant', { item: itemName });
     }
@@ -82,7 +82,7 @@ const processIfConditionalResponse = (response, data, scure) => {
 };
 
 const scureUseOneItem = (itemName, data, scure) => {
-  const item = scure.items.getBestItem(itemName, data.roomId);
+  const item = scure.items.getBestItem(itemName, data);
   const usage = scure.usages.getByItemId(item.id);
   if (!usage) {
     return aResponse(scure.sentences.get('use-cant', { item: itemName }));
@@ -100,8 +100,8 @@ const scureUseOneItem = (itemName, data, scure) => {
 };
 
 const scureUseTwoItems = (itemName1, itemName2, data, scure) => {
-  const item1 = scure.items.getBestItem(itemName1, data.roomId);
-  const item2 = scure.items.getBestItem(itemName2, data.roomId);
+  const item1 = scure.items.getBestItem(itemName1, data);
+  const item2 = scure.items.getBestItem(itemName2, data);
   if (!item1 || !item2) {
     return aResponse(scure.sentences.get('use-canttwo', { item1: itemName1, item2: itemName2 }));
   }

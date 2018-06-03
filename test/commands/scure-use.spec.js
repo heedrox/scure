@@ -229,6 +229,17 @@ describe('Ric Escape - when using', () => {
     expect(response.data.usages['combinacion-4815-hab108-cajafuerte']).to.equal(1);
   });
 
+  it('uses two items when one is in inventory but another one with same name is in other room', () => {
+    const itemName = ['Objeto para testar que se pueda ser usado con el diario', 'diario'];
+    data.roomId = 'habitacion-110';
+    data.picked = ['hab108-diario'];
+    data.inventory = ['hab108-diario'];
+
+    const response = scureUse(itemName, data, scure);
+
+    expect(response.sentence).to.contains('Ok, usado.');
+  });
+
   describe('when conditional descriptions (ric + ordenador, for ex)', () => {
     it('works in case no condition', () => {
       const itemName = ['ric', 'ordenador'];

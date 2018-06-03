@@ -133,6 +133,7 @@ exports.data = {
     anItem('special-test-object-for-expecting-answer', 'Objeto especial para esperar respuesta', ['Objeto especial para esperar respuesta'], 'Este objeto lo usas y te pide decir un número', 'sala-mandos', false),
     anItem('special-test-object-for-conditional-picking', 'Objeto especial para condicion picking', [], 'Este objeto solo se puede coger si cumples una condición', 'sala-mandos', aPickingCondition('unlocked:pickcond', 'No lo puedes agarrar hasta que cumplas pickcond')),
     anItem('special-test-object-for-plugin-looking', 'Objeto especial para plugin looking', [], pluginExtension(DummyExtension), 'sala-mandos', false),
+    anItem('usable-con-diario', 'Objeto para testar que se pueda ser usado con el diario', [], '', 'habitacion-110', false),
   ],
   usages: [
     anUsage('sala-mandos-diario', [
@@ -223,6 +224,7 @@ exports.data = {
     anUsage('special-test-object-for-expecting-answer', [
       anExpectAnswerAction('Dime un número', 'number-for-expect'),
     ], false),
+    anUsage(['hab108-diario', 'usable-con-diario'], ['Ok, usado.'], false),
   ],
   answers: [
     anAnswer('computer-code', '9876', anUnlockingAction('El código es correcto. Has desbloqueado el lock.', 'computer-code-lock'), 'Lo siento, la contraseña no es correcta. '),

@@ -16,7 +16,7 @@ const isLookingTheRoom = itemName => (ROOM_SYNS.indexOf(itemName) >= 0);
 
 const scureLook = (itemName, data, scure) => {
   const roomId = currentRoom(data);
-  const item = scure.items.getBestItem(itemName, roomId, scure);
+  const item = scure.items.getBestItem(itemName, data, scure);
   if (isEmptyArg(itemName) || isLookingTheRoom(itemName)) {
     return responses.lookRoom(scure, data, roomId);
   }
