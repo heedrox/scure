@@ -48,6 +48,7 @@ const getMatchingDescription = (descriptions, data, scure) => {
 
 const getDescription = (descriptions, data, scure) => {
   if (typeof descriptions === 'string') return descriptions;
+  if (typeof descriptions[0] === 'undefined') return descriptions;
   const match = getMatchingDescription(descriptions, data, scure);
   return match ? match.description : descriptions[descriptions.length - 1].description;
 };

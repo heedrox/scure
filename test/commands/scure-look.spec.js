@@ -120,4 +120,14 @@ describe('Ric Escape - when looking up', () => {
       expect(response.sentence).to.contains('Es el suelo. No veo nada más.');
     });
   });
+
+  it('shows item descriptions based on plugins', () => {
+    const itemName = 'Objeto especial para plugin looking';
+    data.roomId = 'sala-mandos';
+    data.dummyPluginText = 'This is what Dummy plugin says';
+
+    const response = scureLook(itemName, data, scure);
+
+    expect(response.sentence).to.equal('This is what Dummy plugin says');
+  });
 });

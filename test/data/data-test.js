@@ -132,6 +132,7 @@ exports.data = {
     ], 'biblioteca', false),
     anItem('special-test-object-for-expecting-answer', 'Objeto especial para esperar respuesta', ['Objeto especial para esperar respuesta'], 'Este objeto lo usas y te pide decir un número', 'sala-mandos', false),
     anItem('special-test-object-for-conditional-picking', 'Objeto especial para condicion picking', [], 'Este objeto solo se puede coger si cumples una condición', 'sala-mandos', aPickingCondition('unlocked:pickcond', 'No lo puedes agarrar hasta que cumplas pickcond')),
+    anItem('special-test-object-for-plugin-looking', 'Objeto especial para plugin looking', [], pluginExtension(DummyExtension), 'sala-mandos', false),
   ],
   usages: [
     anUsage('sala-mandos-diario', [

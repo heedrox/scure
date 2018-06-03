@@ -3,6 +3,7 @@
 ## Unreleased
 ### Added
 - aPickingCondition, to allow setting conditions for picking objects.
+- handle pluginExtensions in item descriptions (when looking)
 
 ## 1.0.6
 ### Fixed
