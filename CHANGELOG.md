@@ -1,5 +1,9 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
+## 1.0.8
+### Fixed
+- Show "walk-nowhere" sentence when you can go nowhere.
+
 ## 1.0.7
 ### Added
 - aPickingCondition, to allow setting conditions for picking objects.

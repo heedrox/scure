@@ -18,7 +18,9 @@ const getNotAlowedSentence = (arg, scure, data) => {
 
 const scureWalk = (arg, data, scure) => {
   if (isEmptyArg(arg)) {
-    return aResponse(getPossibleDestinationsSentence(scure, data), data);
+    const possibleDestinations = getPossibleDestinationsSentence(scure, data);
+    const sentence = possibleDestinations !== '' ? possibleDestinations : scure.sentences.get('walk-nowhere');
+    return aResponse(sentence, data);
   }
   const newRoom = scure.rooms.getRoomByName(arg);
   if (!newRoom) {

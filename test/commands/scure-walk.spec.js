@@ -32,8 +32,9 @@ describe('Ric Escape - when walking', () => {
   });
 
   const TEST_DATA = [
-    { room: 'pasillo-norte', destinations: 'Sala de mandos, Comedor y Pasillo central' },
-    { room: 'sala-mandos', destinations: 'Pasillo norte' },
+    { room: 'pasillo-norte', destinations: 'Desde aquí puedo ir a: Sala de mandos, Comedor y Pasillo central' },
+    { room: 'sala-mandos', destinations: 'Desde aquí puedo ir a: Pasillo norte' },
+    { room: 'habitacion-110', destinations: 'No podemos ir a ningún sitio' },
   ];
 
   TEST_DATA.forEach((testData) => {
@@ -44,7 +45,7 @@ describe('Ric Escape - when walking', () => {
       const response = scureWalk(destination, data, scure);
 
       expect(response.data.roomId).to.equal(testData.room);
-      expect(response.sentence).to.contains(`Desde aquí puedo ir a: ${testData.destinations}`);
+      expect(response.sentence).to.contains(`${testData.destinations}`);
     });
   });
 

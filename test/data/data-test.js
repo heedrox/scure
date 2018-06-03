@@ -31,6 +31,7 @@ exports.data = {
     'changed-language': 'Ok, a partir de ahora hablaré en {lang}. ¿Qué quieres que haga?',
     'changed-language-unknown': 'No sé hablar el idioma {lang}. Solo sé hablar inglés y español. ¿Qué quieres hacer?',
     'answer-cant': '¿Perdona? No estaba esperando una respuesta. Inténtalo otra vez.',
+    'walk-nowhere': 'No podemos ir a ningún sitio',
   },
   init: {
     roomId: 'sala-mandos',
