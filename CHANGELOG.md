@@ -1,5 +1,9 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
+## Unrelease
+### Added
+- "Sala" as synonym for "room" when looking general
+
 ## 1.0.8
 ### Fixed
 - Show "walk-nowhere" sentence when you can go nowhere.

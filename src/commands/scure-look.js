@@ -1,7 +1,7 @@
 const { isEmptyArg } = require('../lib/common');
 const { responses } = require('./look/responses');
 
-const ROOM_SYNS = ['habitación', 'habitacion', 'lugar', 'lugares', 'room', 'rooms', 'space', 'place'];
+const ROOM_SYNS = ['habitación', 'habitacion', 'lugar', 'lugares', 'room', 'rooms', 'space', 'place', 'sala', 'salón', 'salita', 'la sala'];
 
 const isInInventory = (scure, item, data) => scure.items.isInInventory(item.id, data.inventory);
 const isInLocation = (item, roomId) =>
