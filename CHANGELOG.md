@@ -1,6 +1,6 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
-## Unrelease
+## 1.0.9
 ### Added
 - "Sala" as synonym for "room" when looking general
 
