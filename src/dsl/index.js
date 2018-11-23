@@ -20,6 +20,8 @@ const anAnswer = (question, answer, response, sentenceWhenWrong) =>
 const aPickingCondition = (condition, response) =>
   ({ isPickingCondition: true, condition, response });
 const pluginExtension = (...data) => ({ isPluginExtension: true, data });
+const aCommandSyn = (fromCommand, arg, toCommand) => ({ fromCommand, arg, toCommand });
+const Commands = { WALK: 'walk', USE: 'use', PICKUP: 'pickup', LOOK: 'look' };
 
 exports.aRoom = aRoom;
 exports.anItem = anItem;
@@ -35,3 +37,5 @@ exports.anAnswer = anAnswer;
 exports.pluginExtension = pluginExtension;
 exports.aPickingAction = aPickingAction;
 exports.aPickingCondition = aPickingCondition;
+exports.aCommandSyn = aCommandSyn;
+exports.Commands = Commands;
