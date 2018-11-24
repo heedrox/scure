@@ -1,13 +1,20 @@
 const { scureWalk } = require('../../src/commands/scure-walk');
 const { scureInitializeState } = require('../../src/commands/scure-initializer');
+const { aRoom } = require('../../src/dsl');
 
 const scure = buildTestScure();
 
 describe('Ric Escape - when walking', () => {
   let data = null;
+  let prevScureData = null;
 
   beforeEach(() => {
     data = scureInitializeState(scure, {});
+    prevScureData = scure.data;
+  });
+
+  afterEach(() => {
+    scure.data = prevScureData;
   });
 
   it('changes the roomId when walking', () => {
@@ -117,5 +124,17 @@ describe('Ric Escape - when walking', () => {
     const response = scureWalk(destination, data, scure);
 
     expect(response.data.roomId).to.equal('habitacion-108');
+  });
+
+  it('works when room name destination is the same as the place im staying', () => {
+    scure.data.rooms.push(aRoom('habitacion-111', 'habitacion 111', ['otra habitación'], 'Una super hab'));
+    scure.data.map['habitacion-111'] = ['habitacion-109'];
+    scure.data.map['habitacion-109'] = ['habitacion-111'];
+    scure.data.rooms.find(r => r.id === 'habitacion-109').synonyms = ['otra habitación'];
+    data.roomId = 'habitacion-109';
+
+    const response = scureWalk('otra habitación', data, scure);
+
+    expect(response.data.roomId).to.equal('habitacion-111');
   });
 });

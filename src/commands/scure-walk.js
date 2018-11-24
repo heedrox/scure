@@ -3,6 +3,10 @@ const { aResponse } = require('../scure-response');
 const { getPossibleDestinationsSentence } = require('../scure-commons');
 const { getDescription } = require('../scure-commons');
 
+const getPlacesToGo = (scure, data) => {
+  const possibleDestinations = getPossibleDestinationsSentence(scure, data);
+  return possibleDestinations !== '' ? possibleDestinations : scure.sentences.get('walk-nowhere');
+};
 const getDestinationUnknownSentence = (arg, scure, data) => {
   const destinationsSentence = getPossibleDestinationsSentence(scure, data);
   const unknownPlaceSentence = scure.sentences.get('destination-unknown', { destination: arg });
@@ -15,19 +19,20 @@ const getNotAlowedSentence = (arg, scure, data) => {
   return (isLocked && lockedDestinationSentence) ?
     lockedDestinationSentence : getDestinationUnknownSentence(arg, scure, data);
 };
+const byAllowedDestination = (rooms, currentRoomId, unlocked) =>
+  nr => rooms.isAllowedDestinationId(nr.id, currentRoomId, unlocked);
 
 const scureWalk = (arg, data, scure) => {
   if (isEmptyArg(arg)) {
-    const possibleDestinations = getPossibleDestinationsSentence(scure, data);
-    const sentence = possibleDestinations !== '' ? possibleDestinations : scure.sentences.get('walk-nowhere');
-    return aResponse(sentence, data);
+    const response = getPlacesToGo(scure, data);
+    return aResponse(response, data);
   }
-  const newRoom = scure.rooms.getRoomByName(arg);
-  if (!newRoom) {
+  const newRooms = scure.rooms.getRoomsByName(arg);
+  if (!newRooms || newRooms.length === 0) {
     return aResponse(getDestinationUnknownSentence(arg, scure, data), data);
   }
-  const isAllowed = scure.rooms.isAllowedDestination(arg, data.roomId, data.unlocked);
-  if (!isAllowed) {
+  const newRoom = newRooms.find(byAllowedDestination(scure.rooms, data.roomId, data.unlocked));
+  if (!newRoom) {
     return aResponse(getNotAlowedSentence(arg, scure, data), data);
   }
   data.roomId = newRoom.id;

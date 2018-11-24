@@ -5,7 +5,7 @@ const itemIsFound = (scure, data, item) =>
   item && (isInInventory(scure, item, data) || isInLocation(item, data.roomId));
 const matchItems = (argument, synArgument, data, scure) => {
   const item = scure.items.getBestItem(argument, data, scure);
-  return item ? (item.id === synArgument && itemIsFound(scure, data, item)): false;
+  return item ? (item.id === synArgument && itemIsFound(scure, data, item)) : false;
 };
 const byCommandSyn = (command, argument, data, scure) => commandSyn =>
   (commandSyn.fromCommand === command) && matchItems(argument, commandSyn.arg, data, scure);

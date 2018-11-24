@@ -38,10 +38,19 @@ class ScureRoomsModel {
     return this.rooms.find(r => isTextEqual(r.name, name) || isSynonym(r.synonyms, name));
   }
 
+  getRoomsByName(name) {
+    return this.rooms.filter(r => isTextEqual(r.name, name) || isSynonym(r.synonyms, name));
+  }
+
   isAllowedDestination(destinationName, fromRoomId, unlocked) {
     const room = this.getRoomByName(destinationName);
     const destIds = getUnlockedDestinationsIds(this.map, fromRoomId, unlocked);
     return destIds.indexOf(room.id) >= 0;
+  }
+
+  isAllowedDestinationId(destinationId, fromRoomId, unlocked) {
+    const destIds = getUnlockedDestinationsIds(this.map, fromRoomId, unlocked);
+    return destIds.indexOf(destinationId) >= 0;
   }
 
   isDestinationLocked(destinationName, fromRoomId, unlocked) {
