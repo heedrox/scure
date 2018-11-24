@@ -1,5 +1,9 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
+## 1.0.10
+### Added
+- Ability to specify synonyms for commands. Like "look - robot" is the same as "use - robot"
+ 
 ## 1.0.9
 ### Added
 - "Sala" as synonym for "room" when looking general
