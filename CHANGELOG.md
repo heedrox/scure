@@ -1,5 +1,10 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
+## 1.2.0
+### Added
+- Handle plugins in answer actions
+- Allow variable answers (must be inside data)
+
 ## 1.1.0
 ### Fixed
 - Walk from a room to another room that has same name
