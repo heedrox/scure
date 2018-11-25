@@ -15,7 +15,7 @@ const scureAnswer = (userAnswer, data, scure) => {
   data.question = undefined;
   if (!theAnswer) {
     return aResponse(scure.sentences.get('answer-cant'), data);
-  } else if (scure.answers.isOk(theAnswer, userAnswer)) {
+  } else if (scure.answers.isOk(theAnswer, userAnswer, data)) {
     data = resolveActions(theAnswer.response, data);
     return aResponse(getSentence(theAnswer.response), data);
   }

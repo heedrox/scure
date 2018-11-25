@@ -11,6 +11,10 @@ const numeralize = x =>
     .replace(/nueve/g, '9')
     .replace(/cero/g, '0');
 
+const compareVariableAnswer = (variableAnswer, userAnswer, data) => {
+  const variableWhereResides = variableAnswer.replace(/var:/g, '');
+  return numeralize(userAnswer) === `${data[variableWhereResides]}`;
+};
 
 class ScureAnswersModel {
   constructor(answers) {
@@ -22,8 +26,10 @@ class ScureAnswersModel {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  isOk(theAnswer, userAnswer) {
-    return theAnswer.answer === numeralize(userAnswer);
+  isOk(theAnswer, userAnswer, data) {
+    return theAnswer.answer.startsWith('var:') ?
+      compareVariableAnswer(theAnswer.answer, userAnswer, data) :
+      theAnswer.answer === numeralize(userAnswer);
   }
 }
 
