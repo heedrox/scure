@@ -1,14 +1,14 @@
-const executePlugin = (plugin, data, scure) => plugin(data, scure);
+const executePlugin = (plugin, data, scure, extra) => plugin(data, scure, extra);
 
 const isPluginFunction = plugin => typeof plugin === 'function';
 
-const executePluginExtension = (data, scure) => dataElement =>
-  (isPluginFunction(dataElement) ? executePlugin(dataElement, data, scure) : dataElement);
+const executePluginExtension = (data, scure, extra) => respData =>
+  (isPluginFunction(respData) ? executePlugin(respData, data, scure, extra) : respData);
 
-const executePluginExtensions = (response, data, scure) =>
-  response.data.map(executePluginExtension(data, scure)).join('');
+const executePluginExtensions = (response, data, scure, extra) =>
+  response.data.map(executePluginExtension(data, scure, extra)).join('');
 
-const handlePluginExtensions = (response, data, scure) =>
-  (response.isPluginExtension ? executePluginExtensions(response, data, scure) : response);
+const handlePluginExtensions = (response, data, scure, extra) =>
+  (response.isPluginExtension ? executePluginExtensions(response, data, scure, extra) : response);
 
 exports.handlePluginExtensions = handlePluginExtensions;

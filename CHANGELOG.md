@@ -1,5 +1,9 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
+## 1.3.0
+### Added
+- When handling answer through plugin, sends user answer to plugin
+
 ## 1.2.0
 ### Added
 - Handle plugins in answer actions

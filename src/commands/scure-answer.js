@@ -6,12 +6,12 @@ const { handlePluginExtensions } = require('../lib/plugin-executor');
 const isAction = response =>
   response.isUnlockingAction || response.isPickingAction || response.isExpectingAnswerAction;
 
-const getSentenceFor = (data, scure) => response =>
-  handlePluginExtensions(isAction(response) ? response.response : response, data, scure);
+const getSentenceFor = (data, scure, answer) => response =>
+  handlePluginExtensions(isAction(response) ? response.response : response, data, scure, answer);
 
 const scureAnswer = (userAnswer, data, scure) => {
   const theAnswer = scure.answers.findByQuestion(data.question);
-  const getSentence = getSentenceFor(data, scure);
+  const getSentence = getSentenceFor(data, scure, userAnswer);
   data.question = undefined;
   if (!theAnswer) {
     return aResponse(scure.sentences.get('answer-cant'), data);
