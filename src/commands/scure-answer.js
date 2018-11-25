@@ -19,7 +19,7 @@ const scureAnswer = (userAnswer, data, scure) => {
     data = resolveActions(theAnswer.response, data);
     return aResponse(getSentence(theAnswer.response), data);
   }
-  return aResponse(theAnswer.sentenceWhenWrong, data);
+  return aResponse(getSentence(theAnswer.sentenceWhenWrong), data);
 };
 
 exports.scureAnswer = scureAnswer;
