@@ -1,5 +1,9 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
+## 1.4.1
+### Added
+- esa, esta, ese; as stopwords
+
 ## 1.4.0
 ### Added
 - When answering questions (and wrong answer), maintains context so you can answer again directly
