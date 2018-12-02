@@ -36,12 +36,22 @@ describe('Ric Escape - answering actions', () => {
   });
 
   it('answers when wrong sentence', () => {
-    const userAnswer = '9376';
+    const userAnswer = '0000';
     const data = { roomId: 'sala-mandos', question: 'computer-code' };
 
     const response = scureAnswer(userAnswer, data, scure);
 
     expect(response.sentence).to.contains('Lo siento');
+  });
+
+  it('maintains question and context if wrong', () => {
+    const userAnswer = '0000';
+    const data = { roomId: 'sala-mandos', question: 'computer-code' };
+
+    const response = scureAnswer(userAnswer, data, scure);
+
+    expect(response.data.question).to.equal('computer-code');
+    expect(response.data.lastContext).to.equal('expecting-answer');
   });
 
   it('answers gracefully if no question was pending', () => {

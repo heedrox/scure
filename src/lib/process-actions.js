@@ -1,5 +1,6 @@
 const { addItemIdTo } = require('../scure-commons');
 const { stateUnlock } = require('./state-locks');
+const { setExpectQuestion } = require('./expect-question');
 
 const unlockIfUnlockingAction = (response, data) => {
   if (response.isUnlockingAction) {
@@ -18,8 +19,7 @@ const pickIfPickingAction = (response, data) => {
 
 const setContextIfExpectingAction = (response, data) => {
   if (response.isExpectingAnswerAction) {
-    data.lastContext = 'expecting-answer';
-    data.question = response.question;
+    setExpectQuestion(response.question, data);
   }
   return data;
 };
