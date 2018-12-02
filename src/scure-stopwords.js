@@ -35,6 +35,9 @@ const STOPWORDS = [
   'tu',
   'un',
   'una',
+  'esa',
+  'esta',
+  'ese',
 ];
 
 const byNotStopword = word => STOPWORDS.indexOf(word) === -1;
