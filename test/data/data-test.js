@@ -228,7 +228,7 @@ exports.data = {
     anUsage(['hab108-diario', 'usable-con-diario'], ['Ok, usado.'], false),
   ],
   answers: [
-    anAnswer('computer-code', '9876', anUnlockingAction('El código es correcto. Has desbloqueado el lock.', 'computer-code-lock'), 'Lo siento, la contraseña no es correcta. '),
+    anAnswer('computer-code', '9876', anUnlockingAction('El código es correcto. Has desbloqueado el lock.', 'computer-code-lock'), 'Lo siento, la contraseña {userAnswer} no es correcta. '),
     anAnswer('computer-code-plugin', '1234', anUnlockingAction(pluginExtension(DummyExtension, 'Bien', DummyExtension), 'computer-code-lock'), 'Lo siento, la contraseña no es correcta. '),
   ],
 };

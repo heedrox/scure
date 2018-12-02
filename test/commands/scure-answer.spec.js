@@ -35,6 +35,24 @@ describe('Ric Escape - answering actions', () => {
     expect(response.sentence).to.contains('El código es correcto. Has desbloqueado el lock.');
   });
 
+  it('answers ignore not number sentences', () => {
+    const userAnswer = 'introduce 9 8 7 seis';
+    const data = { roomId: 'sala-mandos', question: 'computer-code' };
+
+    const response = scureAnswer(userAnswer, data, scure);
+
+    expect(response.sentence).to.contains('El código es correcto. Has desbloqueado el lock.');
+  });
+
+  it('answers ignore not number sentences', () => {
+    const userAnswer = 'cargados 9 8 7 seis';
+    const data = { roomId: 'sala-mandos', question: 'computer-code' };
+
+    const response = scureAnswer(userAnswer, data, scure);
+
+    expect(response.sentence).to.contains('El código es correcto. Has desbloqueado el lock.');
+  });
+
   it('answers when wrong sentence', () => {
     const userAnswer = '0000';
     const data = { roomId: 'sala-mandos', question: 'computer-code' };

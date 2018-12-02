@@ -3,6 +3,8 @@ const { resolveActions } = require('../lib/process-actions');
 const { aResponse } = require('../scure-response');
 const { handlePluginExtensions } = require('../lib/plugin-executor');
 const { setExpectQuestion } = require('../lib/expect-question');
+const { stringReplace } = require('../lib/string-replacer');
+const { numeralize } = require('../lib/string-numeralize');
 
 const isAction = response =>
   response.isUnlockingAction || response.isPickingAction || response.isExpectingAnswerAction;
@@ -22,7 +24,9 @@ const scureAnswer = (userAnswer, data, scure) => {
     return aResponse(getSentence(theAnswer.response), data);
   }
   setExpectQuestion(theQuestion, data);
-  return aResponse(getSentence(theAnswer.sentenceWhenWrong), data);
+  const response = stringReplace(getSentence(theAnswer.sentenceWhenWrong),
+    { userAnswer: numeralize(userAnswer) });
+  return aResponse(response, data);
 };
 
 exports.scureAnswer = scureAnswer;
