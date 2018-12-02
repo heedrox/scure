@@ -32,8 +32,16 @@ describe('Ric Escape - answering actions', () => {
 
     const response = scureAnswer(userAnswer, data, scure);
 
-
     expect(response.sentence).to.contains('El código es correcto. Has desbloqueado el lock.');
+  });
+
+  it('answers when wrong sentence', () => {
+    const userAnswer = '9376';
+    const data = { roomId: 'sala-mandos', question: 'computer-code' };
+
+    const response = scureAnswer(userAnswer, data, scure);
+
+    expect(response.sentence).to.contains('Lo siento');
   });
 
   it('answers gracefully if no question was pending', () => {
