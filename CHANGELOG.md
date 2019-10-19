@@ -1,5 +1,9 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
+## 1.4.3
+### Added
+- timeover can have conditional descriptions
+
 ## 1.4.2
 ### Added
 - improved number recognition

@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+const { getDescription } = require('../scure-commons');
 const { aResponse } = require('../scure-response');
 
 const cleanData = (data) => {
@@ -11,7 +12,8 @@ const cleanData = (data) => {
 
 const scureTimeover = (data, scure) => {
   cleanData(data);
-  return aResponse(scure.sentences.get('end-timeover'), data);
+  const description = getDescription(scure.sentences.get('end-timeover'), data, scure);
+  return aResponse(description, data);
 };
 
 exports.scureTimeover = scureTimeover;
