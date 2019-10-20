@@ -1,5 +1,9 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
+## 1.5.0
+### Added
+- saves data[lastItem] when used or looked
+
 ## 1.4.3
 ### Added
 - timeover can have conditional descriptions

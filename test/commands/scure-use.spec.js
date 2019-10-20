@@ -298,4 +298,13 @@ describe('Ric Escape - when using', () => {
     expect(response.sentence.isEndingScene).to.equal(true);
     expect(response.sentence.description).to.contains('he alterado');
   });
+
+  it('saves last used command item', () => {
+    const itemName = ['diario'];
+    data.roomId = 'sala-mandos';
+
+    scureUse(itemName, data, scure);
+
+    expect(data['lastItem']).equals('sala-mandos-diario');
+  });
 });

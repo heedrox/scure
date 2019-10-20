@@ -87,6 +87,7 @@ const scureUseOneItem = (itemName, data, scure) => {
   if (!usage) {
     return aResponse(scure.sentences.get('use-cant', { item: itemName }));
   }
+  data['lastItem'] = item.id;
   if (usage.onlyOnce && scure.usages.isUsed(item.id, data.usages)) {
     return aResponse(scure.sentences.get('use-onlyonce'));
   }
@@ -105,6 +106,7 @@ const scureUseTwoItems = (itemName1, itemName2, data, scure) => {
   if (!item1 || !item2) {
     return aResponse(scure.sentences.get('use-canttwo', { item1: itemName1, item2: itemName2 }));
   }
+  data['lastItem'] = [item1.id, item2.id];
   const usage = scure.usages.getByItemIds(item1.id, item2.id);
   if (!usage) {
     return aResponse(scure.sentences.get('use-canttwo', { item1: itemName1, item2: itemName2 }));

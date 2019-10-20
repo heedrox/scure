@@ -23,6 +23,7 @@ const scureLook = (itemName, data, scure) => {
   if (itemIsNotFound(scure, data, roomId, item)) {
     return responses.itemNotFound(scure);
   }
+  data['lastItem'] = item.id;
   return responses.itemDescription(scure, data, item);
 };
 

@@ -130,4 +130,13 @@ describe('Ric Escape - when looking up', () => {
 
     expect(response.sentence).to.equal('This is what Dummy plugin says');
   });
+
+  it('saves last looked command item', () => {
+    const itemName = 'diario';
+    data.roomId = 'sala-mandos';
+
+    scureLook(itemName, data, scure);
+
+    expect(data['lastItem']).equals('sala-mandos-diario');
+  });
 });
