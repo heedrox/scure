@@ -24,8 +24,8 @@ const cleanText = name =>
   joinNumbers(removeExtraSpaces(singularizeWords(removeStopwords(baseChars(name.toLowerCase())))));
 
 const isSynonym = (synonyms, name) => {
-  if (!synonyms) throw new Error(`no synonyms defined for ${name}`);
-  const lcSyns = synonyms.map(cleanText);
+  const synsArr = synonyms || [];
+  const lcSyns = synsArr.map(cleanText);
   return lcSyns.indexOf(cleanText(name)) >= 0;
 };
 
