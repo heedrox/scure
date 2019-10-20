@@ -1,5 +1,9 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
+## 1.5.1
+### Fixed
+- Do not fail when synonyms for an item are missing
+
 ## 1.5.0
 ### Added
 - saves data[lastItem] when used or looked
