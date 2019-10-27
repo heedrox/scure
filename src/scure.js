@@ -23,6 +23,10 @@ class Scure {
     return this.data.mapImage;
   }
 
+  getCanJumpRooms() {
+    return this.data && this.data.init ? this.data.init.canJumpRooms : false;
+  }
+
   getLeftTimeFrom(startTime) {
     const startDateTime = new Date(JSON.parse(startTime));
     const passedTime = ((new Date().getTime() - startDateTime.getTime()) / 1000);

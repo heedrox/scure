@@ -2,13 +2,14 @@ const { scureWalk } = require('../../src/commands/scure-walk');
 const { scureInitializeState } = require('../../src/commands/scure-initializer');
 const { aRoom } = require('../../src/dsl');
 
-const scure = buildTestScure();
 
 describe('Ric Escape - when walking', () => {
   let data = null;
   let prevScureData = null;
+  let scure;
 
   beforeEach(() => {
+    scure = buildTestScure();
     data = scureInitializeState(scure, {});
     prevScureData = scure.data;
   });
@@ -136,5 +137,32 @@ describe('Ric Escape - when walking', () => {
     const response = scureWalk('otra habitación', data, scure);
 
     expect(response.data.roomId).to.equal('habitacion-111');
+  });
+
+  describe('when init.canJumpRooms is true', () => {
+    beforeEach(() => {
+      scure = buildTestScure();
+      scure.data.init.canJumpRooms = true;
+    });
+
+    it('can change room even if they are not in the map', () => {
+      data.roomId = 'sala-mandos';
+      const destination = 'biblioteca';
+
+      const response = scureWalk(destination, data, scure);
+
+      expect(response.data.roomId).to.equal('biblioteca');
+      expect(response.sentence).to.contains('Estoy en la biblioteca');
+    });
+
+    it('cannot jump to a locked room', () => {
+      data.roomId = 'sala-mandos';
+      const destination = 'habitación 108';
+
+      const response = scureWalk(destination, data, scure);
+
+      expect(response.data.roomId).to.equal('sala-mandos');
+      expect(response.sentence).to.contains('No sé ir al sitio habitación 108');
+    });
   });
 });

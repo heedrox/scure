@@ -14,13 +14,16 @@ const getDestinationUnknownSentence = (arg, scure, data) => {
 };
 
 const getNotAlowedSentence = (arg, scure, data) => {
-  const isLocked = scure.rooms.isDestinationLocked(arg, data.roomId, data.unlocked);
+  const isLocked = scure.rooms.isDestinationLockedAndInMap(arg, data.roomId, data.unlocked);
   const lockedDestinationSentence = scure.rooms.getDestinationLockedSentence(arg, data.roomId);
   return (isLocked && lockedDestinationSentence) ?
     lockedDestinationSentence : getDestinationUnknownSentence(arg, scure, data);
 };
 const byAllowedDestination = (rooms, currentRoomId, unlocked) =>
   nr => rooms.isAllowedDestinationId(nr.id, currentRoomId, unlocked);
+
+const byJumpableDestination = (rooms, currentRoomId, unlocked) =>
+  nr => rooms.isDestinationJumpableFrom(nr.id, currentRoomId, unlocked);
 
 const scureWalk = (arg, data, scure) => {
   if (isEmptyArg(arg)) {
@@ -31,7 +34,11 @@ const scureWalk = (arg, data, scure) => {
   if (!newRooms || newRooms.length === 0) {
     return aResponse(getDestinationUnknownSentence(arg, scure, data), data);
   }
-  const newRoom = newRooms.find(byAllowedDestination(scure.rooms, data.roomId, data.unlocked));
+
+  const newRoom = scure.getCanJumpRooms() ?
+    newRooms.find(byJumpableDestination(scure.rooms, data.roomId, data.unlocked))
+    : newRooms.find(byAllowedDestination(scure.rooms, data.roomId, data.unlocked));
+
   if (!newRoom) {
     return aResponse(getNotAlowedSentence(arg, scure, data), data);
   }

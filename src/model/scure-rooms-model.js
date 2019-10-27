@@ -2,8 +2,11 @@ const { isTextEqual } = require('../scure-commons');
 const { joinMultipleStrings } = require('../scure-commons');
 const { isSynonym } = require('../scure-commons');
 
-const isUnlocked = (unlocked, destination) =>
-  (unlocked && unlocked.indexOf(destination.lockCondition) >= 0);
+const isUnlocked = (unlocked, destination) => {
+  if (typeof destination.lockCondition === 'undefined') return true;
+  return (destination && unlocked && unlocked.indexOf(destination.lockCondition) >= 0);
+};
+
 const getUnlockedIds = unlocked => (destination) => {
   if (!destination.isLockedDestination) return destination;
   if (isUnlocked(unlocked, destination)) return destination.roomId;
@@ -20,9 +23,34 @@ const getLockedDestinationIds = (theMap, fromId, unlocked) =>
 const roomById = id => r =>
   (r.isLockedDestination && r.roomId === id) || (!r.isLockedDestination && r === id);
 const byLockedDestinationAndId = roomId => r => r.isLockedDestination && r.roomId === roomId;
-const isADestination = (theMap, fromId, roomId) => theMap[fromId].find(roomById(roomId));
+const isADestinationInMap = (theMap, fromId, roomId) => theMap[fromId].find(roomById(roomId));
 const isALockedDestination = (theMap, fromId, roomId, unlocked) =>
   getLockedDestinationIds(theMap, fromId, unlocked).indexOf(roomId) >= 0;
+
+const checkFromRoomId = (sourceRoomId, destinationId, unlocked, map) => {
+  if (!map[sourceRoomId]) return false;
+  const destIds = getUnlockedDestinationsIds(map, sourceRoomId, unlocked);
+  return destIds && destIds.indexOf(destinationId) >= 0;
+};
+
+const checkRecursiveFromRoomId = (sourceRoomId, destId, unlocked, map, alreadyChecked) => {
+  if (!map[sourceRoomId]) return false;
+  if (alreadyChecked[sourceRoomId]) return false;
+  const destIds = getUnlockedDestinationsIds(map, sourceRoomId, unlocked);
+  alreadyChecked[sourceRoomId] = 1;
+  if (!destIds) return false;
+  for (let idx = 0; idx < destIds.length; idx += 1) {
+    const found = checkFromRoomId(destIds[idx], destId, unlocked, map);
+    if (found) return true;
+  }
+  for (let idx = 0; idx < destIds.length; idx += 1) {
+    const found = checkRecursiveFromRoomId(destIds[idx], destId, unlocked, map, alreadyChecked);
+    alreadyChecked[destIds[idx]] = 1;
+    if (found) return true;
+  }
+
+  return false;
+};
 
 class ScureRoomsModel {
   constructor(rooms, map) {
@@ -42,20 +70,25 @@ class ScureRoomsModel {
     return this.rooms.filter(r => isTextEqual(r.name, name) || isSynonym(r.synonyms, name));
   }
 
-  isAllowedDestination(destinationName, fromRoomId, unlocked) {
-    const room = this.getRoomByName(destinationName);
-    const destIds = getUnlockedDestinationsIds(this.map, fromRoomId, unlocked);
-    return destIds.indexOf(room.id) >= 0;
-  }
-
   isAllowedDestinationId(destinationId, fromRoomId, unlocked) {
     const destIds = getUnlockedDestinationsIds(this.map, fromRoomId, unlocked);
     return destIds.indexOf(destinationId) >= 0;
   }
 
-  isDestinationLocked(destinationName, fromRoomId, unlocked) {
+  isDestinationJumpableFrom(destinationId, fromRoomId, unlocked) {
+    if (!this.map[fromRoomId]) return false;
+    const destination = this.getRoom(destinationId);
+    if (!destination) return false;
+
+    const canIGo = checkFromRoomId(fromRoomId, destinationId, unlocked, this.map);
+    if (canIGo) return true;
+
+    return checkRecursiveFromRoomId(fromRoomId, destinationId, unlocked, this.map, []);
+  }
+
+  isDestinationLockedAndInMap(destinationName, fromRoomId, unlocked) {
     const room = this.getRoomByName(destinationName);
-    const isAPossibleDestination = isADestination(this.map, fromRoomId, room.id);
+    const isAPossibleDestination = isADestinationInMap(this.map, fromRoomId, room.id);
     const isLocked = isALockedDestination(this.map, fromRoomId, room.id, unlocked);
     return isAPossibleDestination && isLocked;
   }
