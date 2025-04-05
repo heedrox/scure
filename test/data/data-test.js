@@ -42,7 +42,7 @@ exports.data = {
     ],
   },
   rooms: [
-    aRoom('sala-mandos', 'Sala de mandos', ['sala mandos'], 'Estoy en la sala de mandos de la nave espacial. Desde aquí puedo ver un ordenador, el diario de abordo y las ventanas al exterior. ¿Qué hago?'),
+    aRoom('sala-mandos', 'Sala de mandos', ['sala mandos', 'sinonimo de sala de mandos'], 'Estoy en la sala de mandos de la nave espacial. Desde aquí puedo ver un ordenador, el diario de abordo y las ventanas al exterior. ¿Qué hago?'),
     aRoom('pasillo-norte', 'Pasillo norte', ['paseo norte', 'norte'], 'Estoy en el pasillo norte de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada al comedor. ¿Qué hago?'),
     aRoom('pasillo-central', 'Pasillo central', ['paseo central', 'central'], 'Estoy en el pasillo central de la nave espacial. Puedo ver televisores en las paredes, muebles modernos y la entrada a la biblioteca. ¿Qué hago?'),
     aRoom('comedor', 'Comedor', [], [

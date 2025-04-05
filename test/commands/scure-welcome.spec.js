@@ -1,5 +1,5 @@
 const { data } = require('../data/data-test');
-const scure = require('../../src/scure.js').buildScureFor(data);
+const scure = require('../../src/scure').buildScureFor(data);
 const { scureWelcome } = require('../../src/commands/scure-welcome');
 
 describe('Ric Escape - welcome', () => {

@@ -12,12 +12,22 @@ const itemIsNotFound = (scure, data, roomId, item) =>
 
 const currentRoom = data => data.roomId;
 
-const isLookingTheRoom = itemName => (ROOM_SYNS.indexOf(itemName) >= 0);
+const isLookingARoom = itemName => ROOM_SYNS.indexOf(itemName) >= 0;
+
+const isLookingCurrentRoom = (itemName, data, scure) => {
+  const roomId = currentRoom(data);
+  const currentRoomObj = scure.rooms.getRoom(roomId);
+  const roomByName = scure.rooms.getRoomByName(itemName);
+  return itemName && currentRoomObj && roomByName && roomByName.id === currentRoomObj.id;
+};
+
+const isLookingTheRoom = (itemName, data, scure) =>
+  isLookingARoom(itemName) || isLookingCurrentRoom(itemName, data, scure);
 
 const scureLook = (itemName, data, scure) => {
   const roomId = currentRoom(data);
   const item = scure.items.getBestItem(itemName, data, scure);
-  if (isEmptyArg(itemName) || isLookingTheRoom(itemName)) {
+  if (isEmptyArg(itemName) || isLookingTheRoom(itemName, data, scure)) {
     return responses.lookRoom(scure, data, roomId);
   }
   if (itemIsNotFound(scure, data, roomId, item)) {

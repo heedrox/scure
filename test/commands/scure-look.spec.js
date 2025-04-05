@@ -10,10 +10,10 @@ describe('Ric Escape - when looking up', () => {
     data = scureInitializeState(scure, {});
   });
 
-  const EMPTY_ARGS = [null, undefined, '', ' ', 'sala', 'habitación', 'lugar', [], {}];
+  const EMPTY_ARGS = [null, undefined, '', ' ', 'sala', 'habitación', 'lugar', 'sala de mandos', 'sinonimo de sala de mandos', [], {}];
 
   EMPTY_ARGS.forEach((arg) => {
-    it(`looks the room and shows destinations when no argument given or 'habitacion' or 'lugar' is said (arg: ${arg})`, () => {
+    it(`looks the room and shows destinations when no argument given or 'habitacion' or 'lugar' is said or the room name (arg: ${arg})`, () => {
       const itemName = arg;
       data.roomId = 'sala-mandos';
 

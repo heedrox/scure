@@ -1,6 +1,6 @@
 global.chai = require('chai');
 global.sinon = require('sinon');
-const { buildScureFor } = require('../src/scure.js');
+const { buildScureFor } = require('../src/scure');
 const { data } = require('./data/data-test');
 
 global.chai.should();
