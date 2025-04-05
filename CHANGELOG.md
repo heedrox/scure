@@ -1,5 +1,9 @@
 # SCURE - Script Creation Utilities for Ric Escape (Conversational adventures).
 
+## 1.7.0
+### Added
+- Make possible to look room names.
+
 ## 1.6.0
 ### Added
 - Make possible jump rooms
